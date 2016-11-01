@@ -4,6 +4,7 @@ import sys, os, io
 # List all of your Python package dependencies in the
 # requirements.txt file
 
+
 def readfile(filename):
     with io.open(filename, encoding="utf-8") as stream:
         return stream.read().split("\n")

@@ -6,21 +6,14 @@ Created on Jun 22, 2015
 from opencmiss.zinc.field import Field
 from opencmiss.zinc.glyph import Glyph
 
-from mapclientplugins.hoofmeasurementstep.scene.detection import DetectionScene
-from mapclientplugins.hoofmeasurementstep.scene.marker import MarkerScene
+# from mapclientplugins.hoofmeasurementstep.scene.detection import DetectionScene
+# from mapclientplugins.hoofmeasurementstep.scene.marker import MarkerScene
 from mapclientplugins.modelimageviewerstep.scene.image import ImageScene
 
 
 class MeshImageScene(object):
-    '''
-    classdocs
-    '''
-
 
     def __init__(self, model):
-        '''
-        Constructor
-        '''
         self._model = model
         # self._detection_scene = DetectionScene(model.getDetectionModel())
         # self._marker_scene = MarkerScene(model.getMarkerModel())

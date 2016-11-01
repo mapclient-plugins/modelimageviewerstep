@@ -3,21 +3,14 @@ Created on May 22, 2015
 
 @author: hsorby
 '''
-from mapclientplugins.heartsurfacesegmenterstep.definitions import ELEMENT_OUTLINE_GRAPHIC_NAME,\
+from mapclientplugins.modelimageviewerstep.definitions import ELEMENT_OUTLINE_GRAPHIC_NAME,\
     IMAGE_PLANE_GRAPHIC_NAME
 from opencmiss.zinc.glyph import Glyph
 from opencmiss.zinc.field import Field
 
 class ImageScene(object):
-    '''
-    classdocs
-    '''
-
 
     def __init__(self, model):
-        '''
-        Constructor
-        '''
         self._model = model
         self.clear()
         
