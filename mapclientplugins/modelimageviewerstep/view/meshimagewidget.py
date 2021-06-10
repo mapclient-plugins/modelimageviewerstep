@@ -3,7 +3,7 @@ Created on Jun 18, 2015
 
 @author: hsorby
 '''
-from PySide import QtCore, QtGui
+from PySide2 import QtCore, QtGui, QtWidgets
 
 from mapclientplugins.modelimageviewerstep.view.ui_meshimagewidget import Ui_MeshImageWidget
 from mapclientplugins.modelimageviewerstep.scene.meshimagescene import MeshImageScene
@@ -11,7 +11,7 @@ from mapclientplugins.modelimageviewerstep.scene.meshimagescene import MeshImage
 ANGLE_RANGE = 180
 
 
-class MeshImageWidget(QtGui.QWidget):
+class MeshImageWidget(QtWidgets.QWidget):
     '''
     classdocs
     '''
