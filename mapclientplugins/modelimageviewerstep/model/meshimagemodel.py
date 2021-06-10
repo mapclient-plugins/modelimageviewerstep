@@ -6,7 +6,7 @@ from mapclientplugins.modelimageviewerstep.model.image import ImageModel
 from opencmiss.utils.geometry.plane import ZincPlane
 from opencmiss.utils.maths.algorithms import calculateExtents
 from opencmiss.utils.maths.vectorops import mxvectormult
-from opencmiss.utils.zinc import createFiniteElementField, createIsoScalarField, createVisibilityFieldForPlane,\
+from opencmiss.utils.zinc import createFiniteElementField, createIsoScalarField, createVisibilityFieldForPlane, \
     defineStandardVisualisationTools, createNodes, createElements
 
 
@@ -36,7 +36,7 @@ class MeshImageModel(object):
         self._elements = mesh['elements']
         self._createMesh(self._nodes, self._elements)
         extents = calculateExtents(self._nodes)
-        mid_point = [(extents[1] + extents[0])/2.0, (extents[3] + extents[2])/2.0, (extents[5] + extents[4])/2.0]
+        mid_point = [(extents[1] + extents[0]) / 2.0, (extents[3] + extents[2]) / 2.0, (extents[5] + extents[4]) / 2.0]
         self._plane.setRotationPoint(mid_point)
 
     def load_images(self, images_dir):
@@ -77,16 +77,16 @@ class MeshImageModel(object):
         return self._iso_scalar_field
 
     def setRotationAngle(self, angle):
-        c = cos(angle*pi/180.0)
-        s = sin(angle*pi/180.0)
+        c = cos(angle * pi / 180.0)
+        s = sin(angle * pi / 180.0)
         C = 1 - c
         x = self._rotation_axis[0]
         y = self._rotation_axis[1]
         z = self._rotation_axis[2]
 
-        Q = [[x*x*C+c,   x*y*C-z*c, x*z*C+y*s],
-             [y*x*C+z*s, y*y*C+c,   y*z*C-x*s ],
-             [z*x*C-y*s, z*y*C+x*s, z*z*C+c]]
+        Q = [[x * x * C + c, x * y * C - z * c, x * z * C + y * s],
+             [y * x * C + z * s, y * y * C + c, y * z * C - x * s],
+             [z * x * C - y * s, z * y * C + x * s, z * z * C + c]]
 
         n = mxvectormult(Q, self._reference_normal)
 
@@ -124,4 +124,3 @@ class MeshImageModel(object):
         # Define all faces also
         fieldmodule = self._coordinate_field.getFieldmodule()
         fieldmodule.defineAllFaces()
-

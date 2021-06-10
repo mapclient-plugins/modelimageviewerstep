@@ -16,7 +16,6 @@ class MeshImageWidget(QtWidgets.QWidget):
     classdocs
     '''
 
-
     def __init__(self, model, parent=None):
         '''
         Constructor
@@ -24,9 +23,9 @@ class MeshImageWidget(QtWidgets.QWidget):
         super(MeshImageWidget, self).__init__(parent)
         self._ui = Ui_MeshImageWidget()
         self._ui.setupUi(self)
-        
+
         angle_initial_value = 0
-        slider_range = [0, 2*ANGLE_RANGE]
+        slider_range = [0, 2 * ANGLE_RANGE]
         slider_initial_value = ANGLE_RANGE
         self._ui.lineEditAngle.setText(str(angle_initial_value))
         self._ui.horizontalSliderAngle.setMinimum(slider_range[0])
@@ -36,19 +35,19 @@ class MeshImageWidget(QtWidgets.QWidget):
         v = QtGui.QIntValidator(-ANGLE_RANGE, ANGLE_RANGE)
         self._ui.lineEditAngle.setValidator(v)
         self._ui.labelAngle.setText('Angle [{0}, {1}] (Degrees):'.format(-ANGLE_RANGE, ANGLE_RANGE))
-        
+
         self._callback = None
-       
+
         self._model = model
         self._scene = MeshImageScene(model)
-        
+
         self._ui.widgetZinc.setContext(model.getContext())
         # self._ui.widgetZinc.setModel(model.getMarkerModel())
         # self._ui.widgetZinc.setPlaneAngle(angle_initial_value)
         # self._ui.widgetZinc.setSelectionfilter(model.getSelectionfilter())
 
         self._makeConnections()
-        
+
     def _makeConnections(self):
         self._ui.pushButtonContinue.clicked.connect(self._continueExecution)
         self._ui.pushButtonViewAll.clicked.connect(self._viewAllButtonClicked)
@@ -59,10 +58,10 @@ class MeshImageWidget(QtWidgets.QWidget):
 
     def getLandmarks(self):
         return self._model.getLandmarks()
-        
+
     def setCoordinateDescription(self, coordinate_description):
         self._model.setCoordinateDescription(coordinate_description)
-        
+
     def load_mesh(self, mesh):
         self._model.load_mesh(mesh)
 
@@ -76,7 +75,7 @@ class MeshImageWidget(QtWidgets.QWidget):
         self._model.initialise()
         self._scene.initialise()
         self._setupUi()
-        
+
     def registerDoneExecution(self, done_exectution):
         self._callback = done_exectution
 
@@ -97,13 +96,13 @@ class MeshImageWidget(QtWidgets.QWidget):
     def _zincWidgetReady(self):
         pass
         # self._ui.widgetZinc.setSelectionfilter(self._model.getSelectionfilter())
-        
+
     def _viewAllButtonClicked(self):
         self._ui.widgetZinc.viewAll()
-        
+
     def _continueExecution(self):
         self._callback()
-        
+
     def _angleSliderValueChanged(self, value):
         angle = value - ANGLE_RANGE
         self._ui.lineEditAngle.setText(str(angle))

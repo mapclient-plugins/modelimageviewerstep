@@ -1,4 +1,3 @@
-
 '''
 MAP Client Plugin Step
 '''
@@ -103,4 +102,3 @@ class ModelImageViewerStep(WorkflowStepMountPoint):
         implement the opposite of 'serialize'.
         '''
         pass
-
