@@ -6,8 +6,6 @@ from mapclientplugins.modelimageviewerstep.model.image import ImageModel
 from opencmiss.utils.geometry.plane import ZincPlane
 from opencmiss.utils.maths.algorithms import calculateExtents
 from opencmiss.utils.maths.vectorops import mxvectormult
-# from opencmiss.utils.zinc import createFiniteElementField, createIsoScalarField, createVisibilityFieldForPlane, \
-#     defineStandardVisualisationTools, createNodes, createElements
 from opencmiss.utils.zinc.field import createFieldFiniteElement
 from opencmiss.utils.zinc.field import createFieldIsoScalarForPlane
 from opencmiss.utils.zinc.field import createFieldVisibilityForPlane
@@ -22,7 +20,6 @@ class MeshImageModel(object):
         self._file_location = None
         self._location = None
         self._context = Context("MeshImage")
-        # defineStandardVisualisationTools(self._context)
         defineStandardGraphicsObjects(self._context)
 
         self._image_model = ImageModel(self._context)
@@ -32,12 +29,9 @@ class MeshImageModel(object):
         self._rotation_axis = [0, 1, 0]
         self._reference_normal = [0, 0, 1]
         self._region = self._context.getDefaultRegion()
-        # self._coordinate_field = createFiniteElementField(self._region)
         self._coordinate_field = createFieldFiniteElement(self._region)
         self._plane = self._setupDetectionPlane(self._region, self._coordinate_field)
-        # self._iso_scalar_field = createIsoScalarField(self._region, self._coordinate_field, self._plane)
         self._iso_scalar_field = createFieldIsoScalarForPlane(self._region, self._coordinate_field, self._plane)
-        # self._visibility_field = createVisibilityFieldForPlane(self._region, self._coordinate_field, self._plane)
         self._visibility_field = createFieldVisibilityForPlane(self._region, self._coordinate_field, self._plane)
 
     def load_mesh(self, mesh):
@@ -57,8 +51,6 @@ class MeshImageModel(object):
         self._region = None
 
     def initialise(self):
-        # return
-        # self._region = self._context.createRegion()
         self._image_model.initialise(self._region)
 
     def getImageModel(self):
@@ -130,8 +122,7 @@ class MeshImageModel(object):
         createNodes(self._coordinate_field, nodes)
         field_module = self._coordinate_field.getFieldmodule()
         mesh = field_module.findMeshByDimension(2)
-        # then define elements using a list of node indexes
-        # createElements(self._coordinate_field, self._elements)
+        # then define elements using a list of node indexes.
         create_triangle_elements(mesh, self._coordinate_field, elements)
         # Define all faces also
         field_module.defineAllFaces()
