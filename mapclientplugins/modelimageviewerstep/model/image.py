@@ -11,8 +11,6 @@ from opencmiss.zinc.field import Field
 from opencmiss.zinc.status import OK
 
 from opencmiss.utils.image import extractImageCorners
-# from opencmiss.utils.zinc import createFiniteElementField, \
-#     create2DFiniteElement
 from opencmiss.utils.zinc.field import createFieldFiniteElement
 
 from opencmiss.utils.maths.algorithms import calculatePlaneNormal
@@ -119,7 +117,6 @@ class ImageTexture(object):
         fieldmodule = region.getFieldmodule()
         self._coordinate_field = createFieldFiniteElement(region)
         corners = extractImageCorners(directory, filename)
-        print('corners', corners)
         mesh = fieldmodule.findMeshByDimension(2)
         create_square_element(mesh, self._coordinate_field, corners)
         self._image_field = self._createImageField(fieldmodule, os.path.join(directory, filename))
