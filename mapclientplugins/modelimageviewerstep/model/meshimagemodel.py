@@ -6,8 +6,11 @@ from mapclientplugins.modelimageviewerstep.model.image import ImageModel
 from opencmiss.utils.geometry.plane import ZincPlane
 from opencmiss.utils.maths.algorithms import calculateExtents
 from opencmiss.utils.maths.vectorops import mxvectormult
-from opencmiss.utils.zinc import createFiniteElementField, createIsoScalarField, createVisibilityFieldForPlane,\
-    defineStandardVisualisationTools, createNodes, createElements
+from opencmiss.utils.zinc.field import createFieldFiniteElement
+from opencmiss.utils.zinc.field import createFieldIsoScalarForPlane
+from opencmiss.utils.zinc.field import createFieldVisibilityForPlane
+from opencmiss.utils.zinc.general import defineStandardGraphicsObjects
+from opencmiss.utils.zinc.finiteelement import createNodes, create_triangle_elements
 
 
 class MeshImageModel(object):
@@ -17,7 +20,7 @@ class MeshImageModel(object):
         self._file_location = None
         self._location = None
         self._context = Context("MeshImage")
-        defineStandardVisualisationTools(self._context)
+        defineStandardGraphicsObjects(self._context)
 
         self._image_model = ImageModel(self._context)
         # First create coordinate field
@@ -26,17 +29,17 @@ class MeshImageModel(object):
         self._rotation_axis = [0, 1, 0]
         self._reference_normal = [0, 0, 1]
         self._region = self._context.getDefaultRegion()
-        self._coordinate_field = createFiniteElementField(self._region)
+        self._coordinate_field = createFieldFiniteElement(self._region)
         self._plane = self._setupDetectionPlane(self._region, self._coordinate_field)
-        self._iso_scalar_field = createIsoScalarField(self._region, self._coordinate_field, self._plane)
-        self._visibility_field = createVisibilityFieldForPlane(self._region, self._coordinate_field, self._plane)
+        self._iso_scalar_field = createFieldIsoScalarForPlane(self._region, self._coordinate_field, self._plane)
+        self._visibility_field = createFieldVisibilityForPlane(self._region, self._coordinate_field, self._plane)
 
     def load_mesh(self, mesh):
         self._nodes = mesh['points']
         self._elements = mesh['elements']
         self._createMesh(self._nodes, self._elements)
         extents = calculateExtents(self._nodes)
-        mid_point = [(extents[1] + extents[0])/2.0, (extents[3] + extents[2])/2.0, (extents[5] + extents[4])/2.0]
+        mid_point = [(extents[1] + extents[0]) / 2.0, (extents[3] + extents[2]) / 2.0, (extents[5] + extents[4]) / 2.0]
         self._plane.setRotationPoint(mid_point)
 
     def load_images(self, images_dir):
@@ -48,8 +51,6 @@ class MeshImageModel(object):
         self._region = None
 
     def initialise(self):
-        # return
-        # self._region = self._context.createRegion()
         self._image_model.initialise(self._region)
 
     def getImageModel(self):
@@ -77,16 +78,16 @@ class MeshImageModel(object):
         return self._iso_scalar_field
 
     def setRotationAngle(self, angle):
-        c = cos(angle*pi/180.0)
-        s = sin(angle*pi/180.0)
+        c = cos(angle * pi / 180.0)
+        s = sin(angle * pi / 180.0)
         C = 1 - c
         x = self._rotation_axis[0]
         y = self._rotation_axis[1]
         z = self._rotation_axis[2]
 
-        Q = [[x*x*C+c,   x*y*C-z*c, x*z*C+y*s],
-             [y*x*C+z*s, y*y*C+c,   y*z*C-x*s ],
-             [z*x*C-y*s, z*y*C+x*s, z*z*C+c]]
+        Q = [[x * x * C + c, x * y * C - z * c, x * z * C + y * s],
+             [y * x * C + z * s, y * y * C + c, y * z * C - x * s],
+             [z * x * C - y * s, z * y * C + x * s, z * z * C + c]]
 
         n = mxvectormult(Q, self._reference_normal)
 
@@ -118,10 +119,10 @@ class MeshImageModel(object):
         are given as a list of indexes into the node list..
         """
         # First create all the required nodes
-        createNodes(self._coordinate_field, self._nodes)
-        # then define elements using a list of node indexes
-        createElements(self._coordinate_field, self._elements)
+        createNodes(self._coordinate_field, nodes)
+        field_module = self._coordinate_field.getFieldmodule()
+        mesh = field_module.findMeshByDimension(2)
+        # then define elements using a list of node indexes.
+        create_triangle_elements(mesh, self._coordinate_field, elements)
         # Define all faces also
-        fieldmodule = self._coordinate_field.getFieldmodule()
-        fieldmodule.defineAllFaces()
-
+        field_module.defineAllFaces()

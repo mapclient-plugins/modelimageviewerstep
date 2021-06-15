@@ -3,20 +3,21 @@ Created on May 22, 2015
 
 @author: hsorby
 '''
-from mapclientplugins.modelimageviewerstep.definitions import ELEMENT_OUTLINE_GRAPHIC_NAME,\
+from mapclientplugins.modelimageviewerstep.definitions import ELEMENT_OUTLINE_GRAPHIC_NAME, \
     IMAGE_PLANE_GRAPHIC_NAME
 from opencmiss.zinc.glyph import Glyph
 from opencmiss.zinc.field import Field
+
 
 class ImageScene(object):
 
     def __init__(self, model):
         self._model = model
         self.clear()
-        
+
     def initialise(self):
         self._setupVisualisation()
-        
+
     def clear(self):
         self._outline = {}
 
@@ -31,8 +32,8 @@ class ImageScene(object):
         graphic = scene.createGraphicsSurfaces()
         graphic.setCoordinateField(coordinate_field)
         graphic.setTextureCoordinateField(xi)
-#         iso_graphic.setIsoscalarField(iso_scalar_field)
-#         iso_graphic.setListIsovalues(0.0)
+        #         iso_graphic.setIsoscalarField(iso_scalar_field)
+        #         iso_graphic.setListIsovalues(0.0)
         graphic.setName(IMAGE_PLANE_GRAPHIC_NAME)
 
         scene.endChange()
@@ -49,14 +50,14 @@ class ImageScene(object):
         outline.setCoordinateField(finite_element_field)
         outline.setName(ELEMENT_OUTLINE_GRAPHIC_NAME)
         scene.endChange()
-#         graphic = scene.createGraphicsPoints()
-#         graphic.setFieldDomainType(Field.DOMAIN_TYPE_NODES)
-#         graphic.setCoordinateField(finite_element_field)
-#         attributes = graphic.getGraphicspointattributes()
-#         attributes.setGlyphShapeType(Glyph.SHAPE_TYPE_SPHERE)
-#         attributes.setBaseSize([1.0])
-#         surface = scene.createGraphicsSurfaces()
-#         surface.setCoordinateField(finite_element_field)
+        #         graphic = scene.createGraphicsPoints()
+        #         graphic.setFieldDomainType(Field.DOMAIN_TYPE_NODES)
+        #         graphic.setCoordinateField(finite_element_field)
+        #         attributes = graphic.getGraphicspointattributes()
+        #         attributes.setGlyphShapeType(Glyph.SHAPE_TYPE_SPHERE)
+        #         attributes.setBaseSize([1.0])
+        #         surface = scene.createGraphicsSurfaces()
+        #         surface.setCoordinateField(finite_element_field)
         return outline
 
     def _setupVisualisation(self):

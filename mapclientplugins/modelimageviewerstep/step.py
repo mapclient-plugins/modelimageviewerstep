@@ -1,9 +1,7 @@
-
 '''
 MAP Client Plugin Step
 '''
-import os
-from PySide import QtGui
+from PySide2 import QtGui
 
 from mapclient.mountpoints.workflowstep import WorkflowStepMountPoint
 
@@ -104,4 +102,3 @@ class ModelImageViewerStep(WorkflowStepMountPoint):
         implement the opposite of 'serialize'.
         '''
         pass
-
