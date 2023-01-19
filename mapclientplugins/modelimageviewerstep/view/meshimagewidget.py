@@ -3,7 +3,7 @@ Created on Jun 18, 2015
 
 @author: hsorby
 '''
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide6 import QtCore, QtGui, QtWidgets
 
 from mapclientplugins.modelimageviewerstep.view.ui_meshimagewidget import Ui_MeshImageWidget
 from mapclientplugins.modelimageviewerstep.scene.meshimagescene import MeshImageScene
