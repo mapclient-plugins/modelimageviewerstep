@@ -1,16 +1,16 @@
 from math import cos, sin, pi
 
-from opencmiss.zinc.context import Context
+from cmlibs.zinc.context import Context
 
 from mapclientplugins.modelimageviewerstep.model.image import ImageModel
-from opencmiss.utils.geometry.plane import ZincPlane
-from opencmiss.utils.maths.algorithms import calculateExtents
-from opencmiss.utils.maths.vectorops import mxvectormult
-from opencmiss.utils.zinc.field import createFieldFiniteElement
-from opencmiss.utils.zinc.field import createFieldIsoScalarForPlane
-from opencmiss.utils.zinc.field import createFieldVisibilityForPlane
-from opencmiss.utils.zinc.general import defineStandardGraphicsObjects
-from opencmiss.utils.zinc.finiteelement import createNodes, create_triangle_elements
+from cmlibs.utils.geometry.plane import ZincPlane
+from cmlibs.maths.algorithms import calculateExtents
+from cmlibs.maths.vectorops import mxvectormult
+from cmlibs.utils.zinc.field import createFieldFiniteElement
+from cmlibs.utils.zinc.field import createFieldIsoScalarForPlane
+from cmlibs.utils.zinc.field import createFieldVisibilityForPlane
+from cmlibs.utils.zinc.general import defineStandardGraphicsObjects
+from cmlibs.utils.zinc.finiteelement import createNodes, create_triangle_elements
 
 
 class MeshImageModel(object):

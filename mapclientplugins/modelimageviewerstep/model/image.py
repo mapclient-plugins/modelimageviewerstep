@@ -6,14 +6,14 @@ Created on May 21, 2015
 import os
 import re
 
-from opencmiss.utils.zinc.finiteelement import create_square_element
-from opencmiss.zinc.field import Field
-from opencmiss.zinc.status import OK
+from cmlibs.utils.zinc.finiteelement import create_square_element
+from cmlibs.zinc.field import Field
+from cmlibs.zinc.status import OK
 
-from opencmiss.utils.image import extractImageCorners
-from opencmiss.utils.zinc.field import createFieldFiniteElement
+from cmlibs.utils.image import extractImageCorners
+from cmlibs.utils.zinc.field import createFieldFiniteElement
 
-from opencmiss.utils.maths.algorithms import calculatePlaneNormal
+from cmlibs.maths.algorithms import calculatePlaneNormal
 
 IMAGE_AXIS_DEFAULT = 1
 

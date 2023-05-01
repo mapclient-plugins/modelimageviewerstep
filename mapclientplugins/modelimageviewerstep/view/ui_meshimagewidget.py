@@ -20,7 +20,7 @@ from PySide6.QtWidgets import (QApplication, QGroupBox, QHBoxLayout, QLabel,
     QSizePolicy, QSlider, QSpacerItem, QVBoxLayout,
     QWidget)
 
-from opencmiss.zincwidgets.sceneviewerwidget import SceneviewerWidget
+from cmlibs.widgets.sceneviewerwidget import SceneviewerWidget
 
 class Ui_MeshImageWidget(object):
     def setupUi(self, MeshImageWidget):
